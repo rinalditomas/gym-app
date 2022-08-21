@@ -144,7 +144,7 @@ const Workout = ({ id, workoutId }) => {
         })
       }
       await deleteDoc(selectedExerciseRef)
-      s
+      
   }
   return (
     <div className="h-screen">

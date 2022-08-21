@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Table = ({history}) => {
-  console.log(history)
   return (
     <div className=" flex flex-col">
       <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
