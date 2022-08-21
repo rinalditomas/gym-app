@@ -1,6 +1,6 @@
 {
-  "name": "Next PWA demo",
-  "short_name": "Next PWA",
+  "name": "Progress tracker",
+  "short_name": "Progress tracker",
   "icons": [
     {
       "src": "/icon.png",
