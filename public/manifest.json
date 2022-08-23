@@ -1,6 +1,8 @@
 {
   "name": "Progress tracker",
   "short_name": "Progress tracker",
+  "start_url": "/",
+  "display": "standalone",
   "icons": [
     {
       "src": "/icon.png",
@@ -16,7 +18,5 @@
   ],
   "theme_color": "#FFFFFF",
   "background_color": "#FFFFFF",
-  "start_url": "/",
-  "display": "standalone",
   "orientation": "portrait"
 }

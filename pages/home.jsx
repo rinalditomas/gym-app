@@ -114,6 +114,7 @@ const HomePage = ({ user }) => {
       <Head>
         <title>Create Next App</title>
         <meta name="description" content="Gym progress app" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
         <link rel="icon" href="/icon.png" />
       </Head>
       <DynamicModal
