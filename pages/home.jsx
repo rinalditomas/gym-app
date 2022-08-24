@@ -111,7 +111,7 @@ const HomePage = ({ user }) => {
   const signOutUser = () => {
     signOut(auth);
   };
-  if(user.displayName && plans){
+  if(user && plans){
 
     return (
       <div className={styles.container}>
