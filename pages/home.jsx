@@ -115,7 +115,7 @@ const HomePage = ({ user }) => {
         <title>Create Next App</title>
         <meta name="description" content="Gym progress app" />
         <meta name="viewport"
-    content="width=device-width; initial-scale=1; viewport-fit=cover"></meta>
+    content="width=device-width; initial-scale=1"></meta>
        <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 
