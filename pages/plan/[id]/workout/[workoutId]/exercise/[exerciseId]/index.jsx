@@ -106,6 +106,7 @@ const Workout = ({ id, workoutId, exerciseId }) => {
           if (snapshot.docs.length < 1){
             let message = 'No records found in the picked date'
                 setMainError(message)
+                setHistory([])
           }else{
             setHistory(
               snapshot.docs.map((doc) => {
