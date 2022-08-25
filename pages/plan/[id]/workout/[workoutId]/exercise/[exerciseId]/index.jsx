@@ -72,10 +72,9 @@ const Workout = ({ id, workoutId, exerciseId }) => {
     };
 
     getDB();
-  });
+  },[]);
 
-  if(exercises && history){
-
+  if (exercises.excersice_1_name && history.length > 0) {
     return (
       <div className="h-screen">
         <DynamicModal
@@ -110,7 +109,7 @@ const Workout = ({ id, workoutId, exerciseId }) => {
               >
                 History
               </button>
-  
+
               <button
                 onClick={() => setSelectedTab("graph")}
                 name="exercise_type"
@@ -145,8 +144,8 @@ const Workout = ({ id, workoutId, exerciseId }) => {
         </div>
       </div>
     );
-  }else{
-    return <Loading />
+  } else {
+    return <Loading />;
   }
 
 };

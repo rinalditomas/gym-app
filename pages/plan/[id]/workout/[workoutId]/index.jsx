@@ -46,7 +46,7 @@ const Workout = ({ id, workoutId }) => {
     };
 
     getDB();
-  });
+  },[]);
 
   const createNewExc = async (e) => {
     e.currentTarget.disabled = true;
@@ -142,7 +142,7 @@ const Workout = ({ id, workoutId }) => {
     }
     await deleteDoc(selectedExerciseRef);
   };
-if(workout && exercises){
+if(workout.name && exercises.length >0 ){
 
   return (
     <div className="h-screen">

@@ -111,8 +111,8 @@ const HomePage = ({ user }) => {
   const signOutUser = () => {
     signOut(auth);
   };
-  if(user && plans){
-
+  console.log(user)
+  if (user !== null  && plans.length > 0) {
     return (
       <div className={styles.container}>
         <Head>
@@ -121,7 +121,7 @@ const HomePage = ({ user }) => {
           <meta name="viewport" content="width=device-width; initial-scale=1"></meta>
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
-  
+
           <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
           <link rel="icon" href="/icon.png" />
         </Head>
@@ -178,7 +178,7 @@ const HomePage = ({ user }) => {
               </div>
             ))}
           </div>
-  
+
           <div className="h-[20%] flex justify-center items-center">
             <button
               onClick={() => setOpen(!open)}
@@ -191,8 +191,8 @@ const HomePage = ({ user }) => {
         </div>
       </div>
     );
-  }else{
-   return  <Loading />
+  } else {
+    return <Loading />;
   }
 
 };

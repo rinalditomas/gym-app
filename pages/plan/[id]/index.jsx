@@ -57,7 +57,7 @@ const Plan = ({ id }) => {
       });
     };
     getDB();
-  });
+  },[]);
 
   const deleteWorkOut = async () => {
     let exercisesCollectionRef = collection(db, "plan", id, "workouts", selectedWorkout.id, "exercises");
@@ -92,7 +92,9 @@ const Plan = ({ id }) => {
     await deleteDoc(selectedWorkoutRef);
     setOpenPanel(false);
   };
-  if(plan && workouts){
+  console.log(plan, 'plan')
+  console.log(workouts, "workouts");
+  if(plan.name && workouts.length > 0 ){
 
     return (
       <div className="h-screen">
