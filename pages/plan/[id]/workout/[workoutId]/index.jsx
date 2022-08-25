@@ -129,7 +129,6 @@ const Workout = ({ id, workoutId }) => {
     }
   };
   const deleteExercise = async (exercise) => {
-    console.log(exercise);
     let historyRef = collection(db, "plan", id, "workouts", workoutId, "exercises", exercise.id, "history");
     let selectedExerciseRef = doc(db, "plan", id, "workouts", workoutId, "exercises", exercise.id);
     let historial = await getDocs(historyRef);

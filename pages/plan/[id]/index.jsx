@@ -92,8 +92,7 @@ const Plan = ({ id }) => {
     await deleteDoc(selectedWorkoutRef);
     setOpenPanel(false);
   };
-  console.log(plan, 'plan')
-  console.log(workouts, "workouts");
+
   if(plan.name && workouts.length > 0 ){
 
     return (

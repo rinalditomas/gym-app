@@ -1,10 +1,23 @@
 import React, { useEffect, useState } from "react";
 
 import { db, app } from "../../../../../../../firebase/firebaseConfig";
-import { getDoc, collection, doc, getDocs, addDoc, onSnapshot, serverTimestamp, Timestamp } from "firebase/firestore";
+import {
+  getDoc,
+  collection,
+  doc,
+  getDocs,
+  addDoc,
+  onSnapshot,
+  serverTimestamp,
+  Timestamp,
+  query,
+  orderBy,
+  limit,
+  where,
+} from "firebase/firestore";
 import Link from "next/link";
 import { ArrowLeftIcon, PlusSmIcon } from "@heroicons/react/outline";
-import { classNames } from "../../../../../../../constants/Functions";
+import { classNames, functionToSetTimeOutForErrors } from "../../../../../../../constants/Functions";
 import DayExtract from "../../../../../../../components/dayExtract";
 import DynamicModal from "../../../../../../../components/DynamicModal";
 import Loading from "../../../../../../../components/loading";
@@ -15,8 +28,10 @@ const Workout = ({ id, workoutId, exerciseId }) => {
   const [loading, setLoading] = useState(false);
   const [selectedTab, setSelectedTab] = useState("history");
   const [error, setError] = useState(null);
+  const [mainError, setMainError] = useState(null);
   const [input, setInput] = useState({});
   const [open, setOpen] = useState(false);
+
 
   let historyRef = collection(db, "plan", id, "workouts", workoutId, "exercises", exerciseId, "history");
   let exerciseRef = doc(db, "plan", id, "workouts", workoutId, "exercises", exerciseId);
@@ -41,7 +56,7 @@ const Workout = ({ id, workoutId, exerciseId }) => {
     }
 
     let newPlan = await addDoc(historyRef, {
-      date: Date.now(),
+      date: new Date().toDateString(),
       reps: reps,
       reps_super_set: reps_super_set.length > 0 ? reps_super_set : null,
       weight: weight,
@@ -60,7 +75,8 @@ const Workout = ({ id, workoutId, exerciseId }) => {
       } else {
         console.log("No such document!");
       }
-      onSnapshot(historyRef, (snapshot) => {
+      let q = query(historyRef, orderBy("date", "desc"), limit(1));
+      onSnapshot(q, (snapshot) => {
         setHistory(
           snapshot.docs.map((doc) => {
             let id = doc.id;
@@ -72,7 +88,39 @@ const Workout = ({ id, workoutId, exerciseId }) => {
     };
 
     getDB();
-  },[]);
+  }, []);
+
+
+
+  const handleNewDateSelected = (e) => {
+    setMainError(null)
+    let value = e.target.value;
+    let date = new Date(value).toDateString();
+    let q = query(historyRef, where("date", "==", date))
+
+  
+     
+    try {
+        onSnapshot(q, (snapshot) => {
+          console.log()
+          if (snapshot.docs.length < 1){
+            let message = 'No records found in the picked date'
+                setMainError(message)
+          }else{
+            setHistory(
+              snapshot.docs.map((doc) => {
+                let id = doc.id;
+
+                return { ...doc.data(), id };
+              })
+            );
+
+          }
+        });
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   if (exercises.excersice_1_name && history.length > 0) {
     return (
@@ -93,7 +141,7 @@ const Workout = ({ id, workoutId, exerciseId }) => {
           </Link>
           <h1 className="mx-auto my-auto font-bold text-sm ">{exercises.excersice_1_name}</h1>{" "}
         </div>
-        <div className="flex flex-col items-center h-[80%] overflow-y-auto">
+        <div className="flex flex-col items-center h-[70%] overflow-y-auto">
           <div className="mx-auto self-start ">
             <span className="relative z-0 inline-flex shadow-sm rounded-md">
               <button
@@ -125,13 +173,27 @@ const Workout = ({ id, workoutId, exerciseId }) => {
               </button>
             </span>
           </div>
-          <div className="w-full flex  flex-col items-center justify-center mt-4 divide-y divide-gray-500">
+          <div className="w-full flex  flex-col items-center justify-center mt-4 ">
+            <h1>Last record</h1>
             {history.map((hist, index) => (
               <DayExtract history={hist} key={index} />
             ))}
           </div>
+          {mainError && <span className="my-2 font-semibold text-red-800 rounded-xl p-2 bg-red-100">{mainError}</span>}
+          <div className="border w-11/12 border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+            <label htmlFor="name" className="block text-xs font-medium text-gray-900">
+              Pick a date
+            </label>
+            <input
+              type="date"
+              name="date"
+              id="date"
+              onChange={(e) => handleNewDateSelected(e)}
+              className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 focus:outline-none sm:text-sm"
+            />
+          </div>
         </div>
-        <div className="h-[10%] flex justify-center items-center">
+        <div className="h-[20%] flex justify-center items-center">
           <button
             onClick={() => {
               setOpen(true);
@@ -147,7 +209,6 @@ const Workout = ({ id, workoutId, exerciseId }) => {
   } else {
     return <Loading />;
   }
-
 };
 export async function getServerSideProps(context) {
   let id = context.query.id;

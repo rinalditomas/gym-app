@@ -7,5 +7,11 @@ function classNames(...classes) {
 
 
 
+const functionToSetTimeOutForErrors = (message, fn) => {
 
-export { classNames}
+  setTimeout(() => {
+    fn(message)
+  }, 100000);
+}
+
+export {functionToSetTimeOutForErrors, classNames}

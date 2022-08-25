@@ -52,7 +52,6 @@ const HomePage = ({ user }) => {
     }
   }, [user]);
   const deletePlan = async () => {
-    console.log(selectedPlan);
     try {
       let selectedPlanRef = doc(db, "plan", selectedPlan.id);
       let workoutCollectionRef = collection(db, "plan", selectedPlan.id, "workouts");
@@ -111,7 +110,6 @@ const HomePage = ({ user }) => {
   const signOutUser = () => {
     signOut(auth);
   };
-  console.log(user)
   if (user !== null  && plans.length > 0) {
     return (
       <div className={styles.container}>
