@@ -122,7 +122,7 @@ const Workout = ({ id, workoutId, exerciseId }) => {
     }
   };
 
-  if (exercises.excersice_1_name && history.length > 0) {
+  if (exercises.excersice_1_name) {
     return (
       <div className="h-screen">
         <DynamicModal
@@ -180,17 +180,20 @@ const Workout = ({ id, workoutId, exerciseId }) => {
             ))}
           </div>
           {mainError && <span className="my-2 font-semibold text-red-800 rounded-xl p-2 bg-red-100">{mainError}</span>}
-          <div className="border w-11/12 border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
-            <label htmlFor="name" className="block text-xs font-medium text-gray-900">
-              Pick a date
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              Pick Date
             </label>
-            <input
-              type="date"
-              name="date"
-              id="date"
-              onChange={(e) => handleNewDateSelected(e)}
-              className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 focus:outline-none sm:text-sm"
-            />
+            <div className="mt-1">
+              <input
+                type="date"
+                name="date"
+                id="date"
+                onChange={(e) => handleNewDateSelected(e)}
+                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                placeholder="you@example.com"
+              />
+            </div>
           </div>
         </div>
         <div className="h-[20%] flex justify-center items-center">
