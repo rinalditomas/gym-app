@@ -176,26 +176,26 @@ const Workout = ({ id, workoutId, exerciseId }) => {
             </span>
           </div>
           <div className="w-full flex  flex-col items-center justify-center mt-4 ">
-            <h1>Last record</h1>
+            {history.length > 0 && <h1>Last record</h1>}
             {history.map((hist, index) => (
               <DayExtract history={hist} key={index} />
             ))}
           </div>
           {mainError && <span className="my-2 font-semibold text-red-800 rounded-xl p-2 bg-red-100">{mainError}</span>}
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+          <div className="w-full self-center flex flex-col items-center">
+            <label htmlFor="email" className="block text-center text-sm font-medium text-gray-700">
               Pick Date
             </label>
-            <div className="mt-1">
+         
               <input
                 type="date"
                 name="date"
                 id="date"
                 onChange={(e) => handleNewDateSelected(e)}
-                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                placeholder="you@example.com"
+                className="shadow-sm w-11/12 py-2 mt-2 px-4  block  sm:text-sm border-[1px] focus:outline-none border-gray-300 rounded-md"
+               
               />
-            </div>
+       
           </div>
         </div>
         <div className="h-[20%] flex justify-center items-center">
@@ -204,7 +204,7 @@ const Workout = ({ id, workoutId, exerciseId }) => {
               setOpen(true);
             }}
             type="button"
-            className="inline-flex  shadow-xl items-center p-4 border border-transparent rounded-full  text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="inline-flex shadow-xl items-center p-4 border border-transparent rounded-full  text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             <PlusSmIcon className="h-7 w-7" aria-hidden="true" />
           </button>
