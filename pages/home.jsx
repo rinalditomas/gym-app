@@ -17,7 +17,7 @@ import { getAuth } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
 import Loading from "../components/loading";
 
-const HomePage = ({ user }) => {
+const HomePage = ({ user, logOut }) => {
   const [openPanel, setOpenPanel] = useState(false);
   const [error, setError] = useState(null);
   const [open, setOpen] = useState(false);
@@ -107,10 +107,8 @@ const HomePage = ({ user }) => {
     }
   };
 
-  const signOutUser = () => {
-    signOut(auth);
-  };
-  if (user !== null  && plans.length > 0) {
+
+  if (user !== null) {
     return (
       <div className={styles.container}>
         <Head>
@@ -142,7 +140,7 @@ const HomePage = ({ user }) => {
               </div>
               <h1 className=" text-2xl font-bold w-5/6">Choose the plan you are working on</h1>
             </div>
-            <button className=" w-5 h-5 self-start" onClick={signOutUser}>
+            <button className=" w-5 h-5 self-start" onClick={logOut}>
               <LogoutIcon className="w-8 h-8" />
             </button>
           </div>
@@ -192,7 +190,6 @@ const HomePage = ({ user }) => {
   } else {
     return <Loading />;
   }
-
 };
 
 export default HomePage;
