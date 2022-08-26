@@ -57,6 +57,7 @@ const Workout = ({ id, workoutId, exerciseId }) => {
 
     let newPlan = await addDoc(historyRef, {
       date: new Date().toDateString(),
+      dateStamp: Timestamp.now(),
       reps: reps,
       reps_super_set: reps_super_set.length > 0 ? reps_super_set : null,
       weight: weight,
@@ -75,7 +76,7 @@ const Workout = ({ id, workoutId, exerciseId }) => {
       } else {
         console.log("No such document!");
       }
-      let q = query(historyRef, orderBy("date", "desc"), limit(1));
+      let q = query(historyRef, orderBy("dateStamp", "desc"), limit(1));
       onSnapshot(q, (snapshot) => {
         setHistory(
           snapshot.docs.map((doc) => {
