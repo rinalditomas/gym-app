@@ -19,8 +19,7 @@ import HomePage from "./home";
 
 export default function Home() {
 
-  const [user, setUser] = useState({});
-  const [authentication, setAuthentication] = useState(false);
+  const [user, setUser] = useState(null);
 
    const googleSignIn = () => {
      const provider = new GoogleAuthProvider();
@@ -30,6 +29,7 @@ export default function Home() {
 
    const logOut = () => {
      signOut(auth);
+
    };
 
    useEffect(() => {
@@ -40,9 +40,9 @@ export default function Home() {
        unsubscribe();
      };
    }, []);
-  if (!user) {
+  if (user === null) {
     return <Login googleSignIn={googleSignIn} />;
   } else {
-    return <HomePage user={user}/>
+    return <HomePage user={user} logOut={logOut}/>
   }
 }
