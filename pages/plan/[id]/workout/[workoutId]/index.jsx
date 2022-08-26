@@ -141,7 +141,7 @@ const Workout = ({ id, workoutId }) => {
     }
     await deleteDoc(selectedExerciseRef);
   };
-if(workout.name && exercises.length >0 ){
+if(workout.name ){
 
   return (
     <div className="h-screen">
@@ -164,7 +164,7 @@ if(workout.name && exercises.length >0 ){
         </button>
       </div>
   
-      <div className="flex flex-col  items-center h-[70%]">
+      <div className="flex flex-col overflow-y-auto items-center h-[70%]">
         {exercises.map((exc, index) =>
           exc.exercise_type === "dropset" ? (
             <div className="w-full" key={index}>
