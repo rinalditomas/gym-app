@@ -114,7 +114,7 @@ const Plan = ({ id }) => {
           <h1 className="mx-auto my-auto font-bold text-lg ">{plan.name}</h1>
         </div>
   
-        <div className="flex flex-col items-center mt-8 h-[70%] overflow-y-auto ">
+        <div className="flex flex-col items-center mt-8 h-[66%] overflow-y-auto ">
           {workouts &&
             workouts.map((workout, index) => (
               <div
